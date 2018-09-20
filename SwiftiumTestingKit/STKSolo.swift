@@ -202,9 +202,11 @@ public class STKSolo: NSObject {
         testActor.enterText(intoCurrentFirstResponder: text)
     }
     
+    #if targetEnvironment(simulator)
     public func acknowledgeSystemAlert() {
         testActor.acknowledgeSystemAlert()
     }
+    #endif
 }
 
 extension STKSolo {
