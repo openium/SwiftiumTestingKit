@@ -12,10 +12,10 @@ import KIF
 import SimulatorStatusMagiciOS
 
 public class STKSolo: NSObject {
-    var animationSpeed: Float = 1.0
-    var defaultTimeToWaitForever: Double = 20
-    var timeToWaitForever: Double {
-        var time = defaultTimeToWaitForever
+    public var animationSpeed: Float = 1.0
+    public var timeToWaitForever: Double = 20
+    var internalTimeToWaitForever: Double {
+        var time = timeToWaitForever
         if isUserJenkinsOrHudson() {
             time = 0
         }
@@ -156,7 +156,7 @@ public class STKSolo: NSObject {
     }
     
     public func waitForever() {
-        testActor.wait(forTimeInterval: timeToWaitForever)
+        testActor.wait(forTimeInterval: internalTimeToWaitForever)
     }
     
     public func waitFor(timeInterval: TimeInterval) {
