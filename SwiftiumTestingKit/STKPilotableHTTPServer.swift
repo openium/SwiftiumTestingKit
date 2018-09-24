@@ -17,9 +17,6 @@ public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> OHHTTPStubsTest
 public class STKPilotableHTTPServer: NSObject {
     
     static var nonForeverQueuedDescriptors: [OHHTTPStubsDescriptor] = {
-        OHHTTPStubs.onStubMissing({ (request) in
-            // ??
-        })
         OHHTTPStubs.onStubActivation({ (request, descriptor, response) in
             removeDescriptorFromQueue(descriptor)
         })
@@ -70,6 +67,9 @@ public class STKPilotableHTTPServer: NSObject {
         self.scheme = scheme
         self.host = host
         self.documentRoot = documentRoot
+        OHHTTPStubs.onStubMissing({ (request) in
+            NSLog("no served response queued for request \(request)")
+        })
     }
     
     func pathFromDocumentRoot(of fileAtPath: String) -> String {
@@ -120,11 +120,11 @@ public class STKPilotableHTTPServer: NSObject {
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
                             serveForever: Bool = false) -> URL {
+        let stubPath = self.pathFromDocumentRoot(of: fileAtPath)
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
-            let stubPath = self.pathFromDocumentRoot(of: fileAtPath)
             return OHHTTPStubsResponse(fileAtPath: stubPath,
                                        statusCode: statusCode,
-                                       headers: self.headersWithMimeTypeOfFile(at: path))
+                                       headers: self.headersWithMimeTypeOfFile(at: fileAtPath))
         }
         if serveForever == false {
             STKPilotableHTTPServer.nonForeverQueuedDescriptors.append(descriptor)
@@ -134,7 +134,7 @@ public class STKPilotableHTTPServer: NSObject {
     
     public func makeRequest(onPath path: String,
                             beRedirectedToLocation toLocation: String,
-                            statusCode: Int32 = 200,
+                            statusCode: Int32 = 301,
                             serveForever: Bool = false) -> URL {
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path)) { _ in
             return OHHTTPStubsResponse(data: Data(),

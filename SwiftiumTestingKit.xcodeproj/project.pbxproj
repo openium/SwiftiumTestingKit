@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA277C522159202A00E847EC /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C4F2159202700E847EC /* KIF.framework */; };
+		BA277C532159202A00E847EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C502159202700E847EC /* OHHTTPStubs.framework */; };
+		BA277C542159202A00E847EC /* SimulatorStatusMagiciOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C512159202700E847EC /* SimulatorStatusMagiciOS.framework */; };
 		BA64425E2152465300E847EC /* SwiftiumTestingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BA64425C2152465300E847EC /* SwiftiumTestingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA6442662152467000E847EC /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6442642152467000E847EC /* XCTestCaseExtension.swift */; };
 		BA6442672152467000E847EC /* STKSolo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6442652152467000E847EC /* STKSolo.swift */; };
@@ -22,9 +25,6 @@
 		BADD79732152558600E847EC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADD79722152558600E847EC /* ViewController.xib */; };
 		BADD7975215255C100E847EC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD7974215255C100E847EC /* main.swift */; };
 		BADD7977215255FC00E847EC /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD7976215255FC00E847EC /* TestingAppDelegate.swift */; };
-		BADD797D21525DDF00E847EC /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADD797C21525DDF00E847EC /* KIF.framework */; };
-		BADD79892152758200E847EC /* SimulatorStatusMagiciOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADD79882152758200E847EC /* SimulatorStatusMagiciOS.framework */; };
-		BADD798B2153846100E847EC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADD798A2153846100E847EC /* OHHTTPStubs.framework */; };
 		BADD798D215384DC00E847EC /* STKPilotableHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD798C215384DC00E847EC /* STKPilotableHTTPServer.swift */; };
 		BADD798F215384EF00E847EC /* STKPilotableHTTPServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD798E215384EF00E847EC /* STKPilotableHTTPServerTests.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA277C4F2159202700E847EC /* KIF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KIF.framework; path = Carthage/Build/iOS/KIF.framework; sourceTree = "<group>"; };
+		BA277C502159202700E847EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
+		BA277C512159202700E847EC /* SimulatorStatusMagiciOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimulatorStatusMagiciOS.framework; path = Carthage/Build/iOS/SimulatorStatusMagiciOS.framework; sourceTree = "<group>"; };
+		BA277C582159219800E847EC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BA277C592159219800E847EC /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		BA6442592152465300E847EC /* SwiftiumTestingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftiumTestingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA64425C2152465300E847EC /* SwiftiumTestingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftiumTestingKit.h; sourceTree = "<group>"; };
 		BA64425D2152465300E847EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,9 +65,6 @@
 		BADD79722152558600E847EC /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		BADD7974215255C100E847EC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BADD7976215255FC00E847EC /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
-		BADD797C21525DDF00E847EC /* KIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BADD79882152758200E847EC /* SimulatorStatusMagiciOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SimulatorStatusMagiciOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BADD798A2153846100E847EC /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADD798C215384DC00E847EC /* STKPilotableHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STKPilotableHTTPServer.swift; sourceTree = "<group>"; };
 		BADD798E215384EF00E847EC /* STKPilotableHTTPServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STKPilotableHTTPServerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,9 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BADD798B2153846100E847EC /* OHHTTPStubs.framework in Frameworks */,
-				BADD79892152758200E847EC /* SimulatorStatusMagiciOS.framework in Frameworks */,
-				BADD797D21525DDF00E847EC /* KIF.framework in Frameworks */,
+				BA277C522159202A00E847EC /* KIF.framework in Frameworks */,
+				BA277C532159202A00E847EC /* OHHTTPStubs.framework in Frameworks */,
+				BA277C542159202A00E847EC /* SimulatorStatusMagiciOS.framework in Frameworks */,
 				BA64426A215246B300E847EC /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,9 +99,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA277C4E2159201300E847EC /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				BA277C4F2159202700E847EC /* KIF.framework */,
+				BA277C502159202700E847EC /* OHHTTPStubs.framework */,
+				BA277C512159202700E847EC /* SimulatorStatusMagiciOS.framework */,
+			);
+			name = Carthage;
+			sourceTree = "<group>";
+		};
 		BA64424F2152465300E847EC = {
 			isa = PBXGroup;
 			children = (
+				BA277C592159219800E847EC /* CHANGELOG.md */,
+				BA277C582159219800E847EC /* README.md */,
+				BA277C4E2159201300E847EC /* Carthage */,
 				BA64425B2152465300E847EC /* SwiftiumTestingKit */,
 				BA644270215246CC00E847EC /* STKTestApp */,
 				BA644285215246CD00E847EC /* STKTestAppTests */,
@@ -133,9 +148,6 @@
 		BA644268215246B300E847EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BADD798A2153846100E847EC /* OHHTTPStubs.framework */,
-				BADD79882152758200E847EC /* SimulatorStatusMagiciOS.framework */,
-				BADD797C21525DDF00E847EC /* KIF.framework */,
 				BA644269215246B300E847EC /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -224,6 +236,7 @@
 				BA64427E215246CD00E847EC /* Sources */,
 				BA64427F215246CD00E847EC /* Frameworks */,
 				BA644280215246CD00E847EC /* Resources */,
+				BA277C552159207B00E847EC /* Carthage copy test frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,6 +318,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BA277C552159207B00E847EC /* Carthage copy test frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/KIF.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OHHTTPStubs.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftiumTestingKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SimulatorStatusMagiciOS.framework",
+			);
+			name = "Carthage copy test frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KIF.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OHHTTPStubs.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftiumTestingKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SimulatorStatusMagiciOS.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA6442552152465300E847EC /* Sources */ = {
@@ -494,7 +537,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftiumTestingKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -523,7 +569,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SwiftiumTestingKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (

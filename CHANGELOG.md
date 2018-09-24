@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+Fix resource path validation when queueing network request
+Fix incorrect default http code for redirections
+
+### Removed
+
+## [0.1.1](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+### Added
+
+### Changed
 
 ### Removed
 
