@@ -18,21 +18,26 @@ public class STKPilotableHTTPServer: NSObject {
     
     static var nonForeverQueuedDescriptors: [OHHTTPStubsDescriptor] = {
         OHHTTPStubs.onStubActivation({ (request, descriptor, response) in
-            removeDescriptorFromQueue(descriptor)
+            if removeDescriptorFromNonForeverQueue(descriptor) {
+                OHHTTPStubs.removeStub(descriptor)
+            }
         })
         return [OHHTTPStubsDescriptor]()
     }()
     
-    static func removeDescriptorFromQueue(_ descriptor: OHHTTPStubsDescriptor) {
+    static func removeDescriptorFromNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) -> Bool {
+        var removed = false
         let index = nonForeverQueuedDescriptors.firstIndex(where: { (nonForeverDescriptor) -> Bool in
             return nonForeverDescriptor.name == descriptor.name
         })
         if let index = index {
             nonForeverQueuedDescriptors.remove(at: index)
+            removed = true
         }
+        return removed
     }
     
-    static func addDescriptorToQueue(_ descriptor: OHHTTPStubsDescriptor) {
+    static func addDescriptorToNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) {
         descriptor.name = descriptor.debugDescription
         nonForeverQueuedDescriptors.append(descriptor)
     }
@@ -127,11 +132,12 @@ public class STKPilotableHTTPServer: NSObject {
                                        headers: self.headersWithMimeTypeOfFile(at: fileAtPath))
         }
         if serveForever == false {
-            STKPilotableHTTPServer.nonForeverQueuedDescriptors.append(descriptor)
+            STKPilotableHTTPServer.addDescriptorToNonForeverQueue(descriptor)
         }
         return urlForRequest(onPath: path)
     }
     
+    @discardableResult
     public func makeRequest(onPath path: String,
                             beRedirectedToLocation toLocation: String,
                             statusCode: Int32 = 301,
@@ -146,34 +152,4 @@ public class STKPilotableHTTPServer: NSObject {
         }
         return urlForRequest(onPath: path)
     }
-    
-    /*
-    func enqueueToken200() {
-        makeRequest(forVerb: "POST",
-                    onPath: R.secure.api_path + R.secure.api_segment_token,
-                    returnDataOfFile: "restests/api/token/200.json",
-                    statusCode: 200,
-                    serveForever: false)
-    }
-    
-    func enqueueToken401() {
-        makeRequest(forVerb: "POST",
-                    onPath: R.secure.api_path + R.secure.api_segment_token,
-                    returnDataOfFile: "restests/api/token/401.json",
-                    statusCode: 401,
-                    serveForever: false)
-    }
-
-    func mockCommonData() {
-        stub(condition: isScheme(R.secure.https_scheme) && isHost(R.secure.ws_host_dev) && isPath("\(R.secure.ws_api_base_path)\(R.secure.ws_common_data_path)")) { _ in
-            
-            // Stub it with our "wsresponse.json" stub file (which is in same bundle as self)
-            if let stubPath = OHPathForFile("ressources/webservices/get/common_datas.json", type(of: self)) {
-                //return fixture(filePath: stubPath!, headers: ApiRequest.headers)
-                return OHHTTPStubsResponse(fileAtPath: stubPath, statusCode: 200, headers: ApiRequest.headers + ["Content-Type": "application/json"])
-            }
-            return OHHTTPStubsResponse(fileAtPath: "", statusCode: 666, headers: ApiRequest.headers)
-        }
-    }
-    */
 }

@@ -75,8 +75,7 @@ class STKPilotableHTTPServerTests: XCTestCase {
         let url = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json")
         let allServedAfterQueuing = sut.hasServedAllQueuedResponses
         let expectation = self.expectation(description: "file hello.json must be served")
-        let urlWithParams = URL(string: url.absoluteString.appending("?parameter=value"))!
-        let downloadTask = URLSession.shared.dataTask(with: urlWithParams) { (data, urlResponse, error) in
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
             expectation.fulfill()
         }
         downloadTask.resume()
@@ -86,6 +85,65 @@ class STKPilotableHTTPServerTests: XCTestCase {
         XCTAssertFalse(allServedAfterQueuing)
         XCTAssertTrue(sut.hasServedAllQueuedResponses)
     }
+    
+    func testHasServedAllQueuedResponses_shouldReturnTrueEvenWithTwoQueuedResponses() {
+        // Given
+        
+        // When
+        let url = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json")
+        let urlBis = sut.makeRequest(onPath: "/hellobis.json", serveContentOfFileAtPath: "hello.json")
+        let allServedAfterQueuing = sut.hasServedAllQueuedResponses
+        let expectation = self.expectation(description: "file hello.json must be served")
+        let expectationBis = self.expectation(description: "file hello-bis.json must be served")
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            let downloadTaskBis = URLSession.shared.dataTask(with: urlBis) { (data, urlResponse, error) in
+                expectationBis.fulfill()
+            }
+            downloadTaskBis.resume()
+            expectation.fulfill()
+        }
+        downloadTask.resume()
+
+        self.waitForExpectations(timeout: 1.0, handler: nil)
+        
+        // Expect
+        XCTAssertFalse(allServedAfterQueuing)
+        XCTAssertTrue(sut.hasServedAllQueuedResponses)
+    }
+    
+    func testHasServedAllQueuedResponses_shouldReturnTrueEvenWithTwoQueuedResponsesOnSamePath() {
+        // Given
+        
+        // When
+        let urlBis = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json")
+        let url = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json", statusCode: 401)
+        let allServedAfterQueuing = sut.hasServedAllQueuedResponses
+        let expectation = self.expectation(description: "file hello.json must be served with code 401 first")
+        let expectationBis = self.expectation(description: "file hello.json must be served with code 200 then")
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            let downloadTaskBis = URLSession.shared.dataTask(with: urlBis) { (data, urlResponseBis, error) in
+                if let httpResponse = urlResponseBis as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 {
+                    expectationBis.fulfill()
+                }
+            }
+            DispatchQueue.main.async {
+                downloadTaskBis.resume()
+            }
+            if let httpResponse = urlResponse as? HTTPURLResponse,
+                httpResponse.statusCode == 401 {
+                expectation.fulfill()
+            }
+        }
+        downloadTask.resume()
+        
+        self.waitForExpectations(timeout: 2.0, handler: nil)
+        
+        // Expect
+        XCTAssertFalse(allServedAfterQueuing)
+        XCTAssertTrue(sut.hasServedAllQueuedResponses)
+    }
+
 }
 
 extension STKPilotableHTTPServerTests: URLSessionTaskDelegate {
