@@ -8,6 +8,7 @@
 
 import XCTest
 import SwiftiumTestingKit
+import OHHTTPStubs
 
 class STKPilotableHTTPServerTests: XCTestCase {
     
@@ -19,6 +20,19 @@ class STKPilotableHTTPServerTests: XCTestCase {
 
     override func tearDown() {
         sut = nil
+    }
+    
+    func testMakeRequestAndReleaseServer_shouldEmptyStubs() {
+        // Given
+        sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json")
+        let allServedAfterQueuing = sut.hasServedAllQueuedResponses
+        
+        // When
+        sut = nil
+        
+        // Expect
+        XCTAssertFalse(allServedAfterQueuing)
+        XCTAssertEqual(OHHTTPStubs.allStubs().count, 0)
     }
 
     func testMakeRequestReturnData_shouldGiveResourceDataIgnoringQueryParameters() {

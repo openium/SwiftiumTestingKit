@@ -7,18 +7,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.1.3](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.3...latest)
+### Added
+
+### Changed
+Fix accessibility enabled too late
+Fix network call cleaned when server released
+
+### Removed
+
+## [0.1.2](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.2...v0.1.3)
+### Added
+
+### Changed
 Fix mutliple queued responses not removed from queue
 
 ### Removed
 
-## [0.1.2](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
-### Added
-
-### Changed
-
-### Removed
-
-## [0.1.1](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+## [0.1.1](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.1...v0.1.2)
 ### Added
 
 ### Changed

@@ -34,9 +34,6 @@ public class STKSolo: NSObject {
     var window: UIWindow?
     
     lazy var testActor: KIFUITestActor = {
-        if KIFAccessibilityEnabled() == false {
-            KIFEnableAccessibility()
-        }
         guard let testActor = KIFUITestActor(inFile: "STKSolo.swift", atLine: 12, delegate: self) else {
             fatalError("Can't instanciate a KIFUITestActor")
         }
@@ -49,6 +46,12 @@ public class STKSolo: NSObject {
         return testActor
     }()
     var lastExceptions = [Any]()
+    
+    public override init() {
+        if KIFAccessibilityEnabled() == false {
+            KIFEnableAccessibility()
+        }
+    }
     
     @discardableResult
     public func showViewControllerInCleanWindow(_ viewController: UIViewController, inNavigationController: Bool = false) -> UINavigationController? {

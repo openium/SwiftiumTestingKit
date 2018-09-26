@@ -16,16 +16,51 @@ public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> OHHTTPStubsTest
 
 public class STKPilotableHTTPServer: NSObject {
     
-    static var nonForeverQueuedDescriptors: [OHHTTPStubsDescriptor] = {
-        OHHTTPStubs.onStubActivation({ (request, descriptor, response) in
-            if removeDescriptorFromNonForeverQueue(descriptor) {
-                OHHTTPStubs.removeStub(descriptor)
-            }
-        })
-        return [OHHTTPStubsDescriptor]()
-    }()
+    struct WeakServerWrapper {
+        weak var server: STKPilotableHTTPServer?
+    }
     
-    static func removeDescriptorFromNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) -> Bool {
+    static var allPilotableServers: [WeakServerWrapper] = {
+        activateStubMissingAndActivationObservers()
+        let allPilotableServers = [WeakServerWrapper]()
+        return allPilotableServers
+    }()
+    static func addToAllPilotableServers(_ pilotableServer: STKPilotableHTTPServer) {
+        let unownedServer = WeakServerWrapper(server: pilotableServer)
+        allPilotableServers.append(unownedServer)
+    }
+    static func removeFromAllPilotableServers(_ pilotableServer: STKPilotableHTTPServer) {
+        allPilotableServers.removeAll { $0.server == nil }
+        pilotableServer.foreverQueuedDescriptors.forEach { OHHTTPStubs.removeStub($0) }
+        pilotableServer.nonForeverQueuedDescriptors.forEach { OHHTTPStubs.removeStub($0) }
+    }
+    static func activateStubMissingAndActivationObservers() {
+        OHHTTPStubs.onStubMissing({ (request) in
+            NSLog("no served response queued for request \(request)")
+        })
+        OHHTTPStubs.onStubActivation({ (request, descriptor, response) in
+            allPilotableServers.forEach({ (unownedServer) in
+                guard let server = unownedServer.server else { return }
+                if server.removeDescriptorFromNonForeverQueue(descriptor) {
+                    OHHTTPStubs.removeStub(descriptor)
+                }
+            })
+        })
+    }
+    
+    var foreverQueuedDescriptors = [OHHTTPStubsDescriptor]()
+    var nonForeverQueuedDescriptors = [OHHTTPStubsDescriptor]()
+    
+    func queue(descriptor: OHHTTPStubsDescriptor, serveForever: Bool) {
+        if serveForever == false {
+            descriptor.name = descriptor.debugDescription
+            nonForeverQueuedDescriptors.append(descriptor)
+        } else {
+            foreverQueuedDescriptors.append(descriptor)
+        }
+    }
+
+    func removeDescriptorFromNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) -> Bool {
         var removed = false
         let index = nonForeverQueuedDescriptors.firstIndex(where: { (nonForeverDescriptor) -> Bool in
             return nonForeverDescriptor.name == descriptor.name
@@ -35,11 +70,6 @@ public class STKPilotableHTTPServer: NSObject {
             removed = true
         }
         return removed
-    }
-    
-    static func addDescriptorToNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) {
-        descriptor.name = descriptor.debugDescription
-        nonForeverQueuedDescriptors.append(descriptor)
     }
     
     public enum HTTPVerb: String {
@@ -60,7 +90,7 @@ public class STKPilotableHTTPServer: NSObject {
     }
     
     public var hasServedAllQueuedResponses: Bool {
-        return STKPilotableHTTPServer.nonForeverQueuedDescriptors.count == 0
+        return nonForeverQueuedDescriptors.count == 0
     }
     
     let scheme: String
@@ -72,9 +102,12 @@ public class STKPilotableHTTPServer: NSObject {
         self.scheme = scheme
         self.host = host
         self.documentRoot = documentRoot
-        OHHTTPStubs.onStubMissing({ (request) in
-            NSLog("no served response queued for request \(request)")
-        })
+        super.init()
+        STKPilotableHTTPServer.addToAllPilotableServers(self)
+    }
+    
+    deinit {
+        STKPilotableHTTPServer.removeFromAllPilotableServers(self)
     }
     
     func pathFromDocumentRoot(of fileAtPath: String) -> String {
@@ -126,14 +159,13 @@ public class STKPilotableHTTPServer: NSObject {
                             statusCode: Int32 = 200,
                             serveForever: Bool = false) -> URL {
         let stubPath = self.pathFromDocumentRoot(of: fileAtPath)
+        let headers = self.headersWithMimeTypeOfFile(at: fileAtPath)
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
             return OHHTTPStubsResponse(fileAtPath: stubPath,
                                        statusCode: statusCode,
-                                       headers: self.headersWithMimeTypeOfFile(at: fileAtPath))
+                                       headers: headers)
         }
-        if serveForever == false {
-            STKPilotableHTTPServer.addDescriptorToNonForeverQueue(descriptor)
-        }
+        queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)
     }
     
@@ -147,9 +179,7 @@ public class STKPilotableHTTPServer: NSObject {
                                        statusCode: statusCode,
                                        headers: [HTTPHeaders.location.rawValue: toLocation])
         }
-        if serveForever == false {
-            STKPilotableHTTPServer.nonForeverQueuedDescriptors.append(descriptor)
-        }
+        queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)
     }
 }
