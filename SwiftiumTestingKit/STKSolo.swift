@@ -31,7 +31,7 @@ public class STKSolo: NSObject {
     public var navigationControllerClass = UINavigationController.self
     public var windowClass = UIWindow.self
     
-    var window: UIWindow?
+    public private(set) var window: UIWindow?
     
     lazy var testActor: KIFUITestActor = {
         guard let testActor = KIFUITestActor(inFile: "STKSolo.swift", atLine: 12, delegate: self) else {
@@ -97,40 +97,36 @@ public class STKSolo: NSObject {
         } while (now - start) < timeout
     }
     
-    private func waitForAccessibilityElement(matching predicate: NSPredicate) -> UIAccessibilityElement? {
+    private func waitForAccessibilityElement(matching predicateBlock: @escaping (UIAccessibilityElement) -> Bool) -> UIAccessibilityElement? {
         var element: UIAccessibilityElement? = nil
         // IMPROVEMENT: don't reevaluate until having received a UIAccessibilityLayoutChangedNotification
         waitClosureToReturnTrue({ () -> Bool in
-            element = UIApplication.shared.accessibilityElement { (element) -> Bool in
-                return predicate.evaluate(with: element)
-            }
+            element = UIApplication.shared.accessibilityElement(matching: { (element) -> Bool in
+                guard let element = element else { return false }
+                return predicateBlock(element)
+            })
             return element != nil
         }, withinTimeout: timeoutForWaitForMethods, timeBetweenChecks: timeBetweenChecks)
         return element
     }
     
     public func waitFor(text: String) -> Bool {
-        //let element = testActor.waitForView(withAccessibilityLabel: text)
-        let predicate = NSPredicate(format: "%K == %@", "accessibilityLabel", text)
-        let element = waitForAccessibilityElement(matching: predicate)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == text }
         return element != nil
     }
     
     public func waitFor(textWithPrefix prefix: String) -> Bool {
-        let predicate = NSPredicate(format: "%K BEGINSWITH %@", "accessibilityLabel", prefix)
-        let element = waitForAccessibilityElement(matching: predicate)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasPrefix(prefix) ?? false }
         return element != nil
     }
 
     public func waitFor(textWithSuffix suffix: String) -> Bool {
-        let predicate = NSPredicate(format: "%K ENDSWITH %@", "accessibilityLabel", suffix)
-        let element = waitForAccessibilityElement(matching: predicate)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasSuffix(suffix) ?? false }
         return element != nil
     }
 
     public func waitFor(tappableText: String, andTapIt: Bool) -> Bool {
-        let predicate = NSPredicate(format: "%K == %@", "accessibilityLabel", tappableText)
-        let element = waitForAccessibilityElement(matching: predicate)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == tappableText }
         if let element = element {
             if let view = try? UIAccessibilityElement.viewContaining(element, tappable: true) {
                 testActor.tap(element, in: view)
@@ -143,8 +139,7 @@ public class STKSolo: NSObject {
 
     public func waitFor(textToBecomeInvalid: String) -> Bool {
         var textBecameInvalid = false
-        let predicate = NSPredicate(format: "%K == %@", "accessibilityLabel", textToBecomeInvalid)
-        let element = waitForAccessibilityElement(matching: predicate)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == textToBecomeInvalid }
         if element != nil {
             lastExceptions.removeAll()
             testActor.waitForAbsenceOfView(withAccessibilityLabel: textToBecomeInvalid)

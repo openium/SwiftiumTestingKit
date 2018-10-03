@@ -10,6 +10,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.1.4](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+### Added
+
+### Changed
+Replace NSPredicate with == / hasSuffix / hasPrefix
+Expose solo.window
+
+### Removed
+
 ## [0.1.3](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.3...latest)
 ### Added
 
