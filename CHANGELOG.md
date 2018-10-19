@@ -10,7 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [0.1.4](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+### Added
+
+### Changed
+Allow pilotable server to have an empty data as input to manage properly the 204 HTTP code
+
+
+## [0.1.4](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.4...HEAD)
 ### Added
 
 ### Changed
