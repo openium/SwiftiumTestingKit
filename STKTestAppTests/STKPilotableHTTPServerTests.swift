@@ -34,8 +34,45 @@ class STKPilotableHTTPServerTests: XCTestCase {
         XCTAssertFalse(allServedAfterQueuing)
         XCTAssertEqual(OHHTTPStubs.allStubs().count, 0)
     }
+    
+    func testMakeRequestReturnData_emptyData_204() {
+        // Given
+        
+        // When
+        let url = sut.makeRequest(onPath: "/hello.json", data: nil, statusCode: 204)
+        let expectation = self.expectation(description: "file hello.json must be served")
+        let urlWithParams = URL(string: url.absoluteString.appending("?parameter=value"))!
+        let downloadTask = URLSession.shared.dataTask(with: urlWithParams) { (data, urlResponse, error) in
+            if let httpResponse = urlResponse as? HTTPURLResponse,
+                httpResponse.statusCode == 204 && data?.isEmpty == true {
+                expectation.fulfill()
+            }
+        }
+        downloadTask.resume()
+        self.waitForExpectations(timeout: 1.0, handler: nil)
+    }
+    
+    func testMakeRequestReturnData_shouldGiveResourceDataIgnoringQueryParameters_usingData() {
+        // Given
+        let jsonData = dataFromCurrentClassBundleRessource(filename: "hello.json")
+        var servedData: Data? = nil
+        
+        // When
+        let url = sut.makeRequest(onPath: "/hello.json", data: jsonData)
+        let expectation = self.expectation(description: "file hello.json must be served")
+        let urlWithParams = URL(string: url.absoluteString.appending("?parameter=value"))!
+        let downloadTask = URLSession.shared.dataTask(with: urlWithParams) { (data, urlResponse, error) in
+            servedData = data
+            expectation.fulfill()
+        }
+        downloadTask.resume()
+        self.waitForExpectations(timeout: 1.0, handler: nil)
+        
+        // Expect
+        XCTAssertEqual(servedData, jsonData)
+    }
 
-    func testMakeRequestReturnData_shouldGiveResourceDataIgnoringQueryParameters() {
+    func testMakeRequestReturnData_shouldGiveResourceDataIgnoringQueryParameters_usingFileContent() {
         // Given
         let jsonData = dataFromCurrentClassBundleRessource(filename: "hello.json")
         var servedData: Data? = nil

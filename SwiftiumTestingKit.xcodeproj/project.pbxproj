@@ -27,15 +27,18 @@
 		BADD7977215255FC00E847EC /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD7976215255FC00E847EC /* TestingAppDelegate.swift */; };
 		BADD798D215384DC00E847EC /* STKPilotableHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD798C215384DC00E847EC /* STKPilotableHTTPServer.swift */; };
 		BADD798F215384EF00E847EC /* STKPilotableHTTPServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD798E215384EF00E847EC /* STKPilotableHTTPServerTests.swift */; };
+		F9C4852B2179C74300A3A25D /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C4F2159202700E847EC /* KIF.framework */; };
+		F9C4852C2179C74300A3A25D /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C502159202700E847EC /* OHHTTPStubs.framework */; };
+		F9C4852D2179C74300A3A25D /* SimulatorStatusMagiciOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA277C512159202700E847EC /* SimulatorStatusMagiciOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BA644283215246CD00E847EC /* PBXContainerItemProxy */ = {
+		F9C485292179C70B00A3A25D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA6442502152465300E847EC /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BA64426E215246CC00E847EC;
-			remoteInfo = STKTestApp;
+			remoteGlobalIDString = BA6442582152465300E847EC;
+			remoteInfo = SwiftiumTestingKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -67,6 +70,8 @@
 		BADD7976215255FC00E847EC /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		BADD798C215384DC00E847EC /* STKPilotableHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STKPilotableHTTPServer.swift; sourceTree = "<group>"; };
 		BADD798E215384EF00E847EC /* STKPilotableHTTPServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STKPilotableHTTPServerTests.swift; sourceTree = "<group>"; };
+		F9C485272179C5E800A3A25D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		F9C485282179C5E800A3A25D /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +97,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9C4852C2179C74300A3A25D /* OHHTTPStubs.framework in Frameworks */,
 				BADD796F21524D5700E847EC /* SwiftiumTestingKit.framework in Frameworks */,
+				F9C4852B2179C74300A3A25D /* KIF.framework in Frameworks */,
+				F9C4852D2179C74300A3A25D /* SimulatorStatusMagiciOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +110,8 @@
 		BA277C4E2159201300E847EC /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				F9C485272179C5E800A3A25D /* Cartfile */,
+				F9C485282179C5E800A3A25D /* Cartfile.resolved */,
 				BA277C4F2159202700E847EC /* KIF.framework */,
 				BA277C502159202700E847EC /* OHHTTPStubs.framework */,
 				BA277C512159202700E847EC /* SimulatorStatusMagiciOS.framework */,
@@ -223,6 +233,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F9C4852A2179C70B00A3A25D /* PBXTargetDependency */,
 			);
 			name = STKTestApp;
 			productName = STKTestApp;
@@ -241,7 +252,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BA644284215246CD00E847EC /* PBXTargetDependency */,
 			);
 			name = STKTestAppTests;
 			productName = STKTestAppTests;
@@ -330,7 +340,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/KIF.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OHHTTPStubs.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftiumTestingKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SimulatorStatusMagiciOS.framework",
 			);
 			name = "Carthage copy test frameworks";
@@ -339,7 +348,6 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KIF.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OHHTTPStubs.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftiumTestingKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SimulatorStatusMagiciOS.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,10 +392,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BA644284215246CD00E847EC /* PBXTargetDependency */ = {
+		F9C4852A2179C70B00A3A25D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BA64426E215246CC00E847EC /* STKTestApp */;
-			targetProxy = BA644283215246CD00E847EC /* PBXContainerItemProxy */;
+			target = BA6442582152465300E847EC /* SwiftiumTestingKit */;
+			targetProxy = F9C485292179C70B00A3A25D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -631,7 +639,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QH6KR5PAQ7;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = STKTestAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -653,7 +664,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QH6KR5PAQ7;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = STKTestAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

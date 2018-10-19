@@ -154,6 +154,19 @@ public class STKPilotableHTTPServer: NSObject {
     
     @discardableResult
     public func makeRequest(onPath path: String,
+                            data: Data?,
+                            httpVerb: HTTPVerb = .get,
+                            statusCode: Int32 = 200,
+                            serveForever: Bool = false) -> URL {
+        let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
+            return OHHTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: nil)
+        }
+        queue(descriptor: descriptor, serveForever: serveForever)
+        return urlForRequest(onPath: path)
+    }
+    
+    @discardableResult
+    public func makeRequest(onPath path: String,
                             serveContentOfFileAtPath fileAtPath: String,
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
