@@ -6,7 +6,7 @@ This "Kit" adds many feature to speed up iOS app testing. It allows to write Uni
 
 ## Example :
 
-````
+```swift
 func testWaitForTapableTextAndTapIt_shouldHaveTap() {
     // Given
     let solo = STKSolo()
@@ -20,7 +20,7 @@ func testWaitForTapableTextAndTapIt_shouldHaveTap() {
     XCTAssertTrue(waitForText)
     XCTAssertTrue(viewController.tapped)
 }
-````
+```
 
 see more in [STKSoloTests.swift](https://github.com/openium/SwiftiumTestingKit/blob/master/STKTestAppTests/STKSoloTests.swift)
 
