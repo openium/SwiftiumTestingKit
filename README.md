@@ -24,10 +24,37 @@ func testWaitForTapableTextAndTapIt_shouldHaveTap() {
 
 see more in [STKSoloTests.swift](https://github.com/openium/SwiftiumTestingKit/blob/master/STKTestAppTests/STKSoloTests.swift)
 
-## Setup
+## Installation 
 
-Have SwiftiumTestingKit in your cartfile, and add a "Carthage copy frameworks" script in the Unit Test Bundle target with SwiftiumTestingKit.framework, 
-KIF.framework, OHHTTPStubs.framework, and SimulatorStatusMagiciOS.framework copied to the xctest bundle
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](https://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate Alamofire into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "openium/SwiftiumTestingKit" ~> latest
+```
+
+Run `carthage update` to build the framework and drag the built `SwiftiumTestingKit.framework` into your Xcode project.
+
+### Setup
+
+Add the following frameworks to your test target and add a `Copy Files` with `frameworks` destimations to your test target build phases:
+- `SimulatorStatusMagiciOS.framework`
+- `OHHTTPStubs.framework`
+- `SwiftiumTestingKit.framework`
+- `KIF.framework`
+
+![](doc/copy-frameworks.png) 
+
 # To be done :
 
 Add CONTRIBUTING & CODE_OF_CONDUCT files
