@@ -38,6 +38,24 @@ class STKSoloTests: XCTestCase {
         XCTAssertTrue(foundTestText)
     }
 
+    func testWaitForText_shouldFindWhitespacedLabelTest() {
+        // Given
+        let texts = ["Some \n text", "Some \t text"]
+        var foundTestTexts = [String: Bool]()
+        sut.showViewControllerInCleanWindow(viewController)
+        
+        // When
+        for text in texts {
+            viewController.topLabel.text = text
+            
+            foundTestTexts[text] = sut.waitFor(text: text)
+        }
+        
+        // Expect
+        XCTAssertTrue(foundTestTexts[texts[0]] ?? false)
+        XCTAssertTrue(foundTestTexts[texts[1]] ?? false)
+    }
+
     func testWaitForText_shouldFindLabelTestUsingPrefix() {
         // Given
         sut.showViewControllerInCleanWindow(viewController)

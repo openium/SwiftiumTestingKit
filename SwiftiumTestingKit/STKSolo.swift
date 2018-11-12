@@ -110,23 +110,31 @@ public class STKSolo: NSObject {
         return element
     }
     
+    public func accessibilityCleaned(text: String) -> String {
+        return text.replacingOccurrences(of: "\n", with: " ")
+    }
+    
     public func waitFor(text: String) -> Bool {
-        let element = waitForAccessibilityElement { $0.accessibilityLabel == text }
+        let cleanedText = accessibilityCleaned(text: text)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         return element != nil
     }
     
     public func waitFor(textWithPrefix prefix: String) -> Bool {
-        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasPrefix(prefix) ?? false }
+        let cleanedText = accessibilityCleaned(text: prefix)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasPrefix(cleanedText) ?? false }
         return element != nil
     }
 
     public func waitFor(textWithSuffix suffix: String) -> Bool {
-        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasSuffix(suffix) ?? false }
+        let cleanedText = accessibilityCleaned(text: suffix)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel?.hasSuffix(cleanedText) ?? false }
         return element != nil
     }
 
     public func waitFor(tappableText: String, andTapIt: Bool) -> Bool {
-        let element = waitForAccessibilityElement { $0.accessibilityLabel == tappableText }
+        let cleanedText = accessibilityCleaned(text: tappableText)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         if let element = element {
             if let view = try? UIAccessibilityElement.viewContaining(element, tappable: true) {
                 testActor.tap(element, in: view)
@@ -139,10 +147,11 @@ public class STKSolo: NSObject {
 
     public func waitFor(textToBecomeInvalid: String) -> Bool {
         var textBecameInvalid = false
-        let element = waitForAccessibilityElement { $0.accessibilityLabel == textToBecomeInvalid }
+        let cleanedText = accessibilityCleaned(text: textToBecomeInvalid)
+        let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         if element != nil {
             lastExceptions.removeAll()
-            testActor.waitForAbsenceOfView(withAccessibilityLabel: textToBecomeInvalid)
+            testActor.waitForAbsenceOfView(withAccessibilityLabel: cleanedText)
             if lastExceptions.isEmpty {
                 textBecameInvalid = true
             }

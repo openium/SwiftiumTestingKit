@@ -10,6 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+### Added
+
+### Changed
+Fixed search for text containing \n 
+
+### Removed
+
 ## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
 ### Added
 
