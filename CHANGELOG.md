@@ -10,6 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.1.7](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+### Added
+Allow pilotable server to specify responses headers for all requests and responses headers for each request
+
+### Changed
+
+### Removed
+
 ## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
 ### Added
 

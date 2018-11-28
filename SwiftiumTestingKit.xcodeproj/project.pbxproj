@@ -36,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		33EB268621AE9CC800945E63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA6442502152465300E847EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA64426E215246CC00E847EC;
+			remoteInfo = STKTestApp;
+		};
 		F9C485292179C70B00A3A25D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA6442502152465300E847EC /* Project object */;
@@ -270,6 +277,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				33EB268721AE9CC800945E63 /* PBXTargetDependency */,
 			);
 			name = STKTestAppTests;
 			productName = STKTestAppTests;
@@ -382,6 +390,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		33EB268721AE9CC800945E63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA64426E215246CC00E847EC /* STKTestApp */;
+			targetProxy = 33EB268621AE9CC800945E63 /* PBXContainerItemProxy */;
+		};
 		F9C4852A2179C70B00A3A25D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BA6442582152465300E847EC /* SwiftiumTestingKit */;

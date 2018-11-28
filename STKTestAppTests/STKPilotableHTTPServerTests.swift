@@ -195,6 +195,57 @@ class STKPilotableHTTPServerTests: XCTestCase {
         XCTAssertTrue(sut.hasServedAllQueuedResponses)
     }
 
+    func testResponseFileHasSpecifiedHeadersResponses_shouldReturnWithSpecifiedHeaders() {
+        // Given
+        let headerContentType = "Content-Type"
+        let headerContentTypeValue = "application/vnd.openium.v1+json"
+        let headerCacheControl = "Cache-Control"
+        let headerCacheControlValue = "no-cache"
+        let customResponseHeaders = [headerContentType: headerContentTypeValue]
+        sut.defaultResponseHeaders = [headerCacheControl: headerCacheControlValue]
+        
+        // When
+        
+        let url = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json", customResponseHeaders: customResponseHeaders)
+        let expectation = self.expectation(description: "file hello.json must be served with custom headers content type")
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            if let httpResponse = urlResponse as? HTTPURLResponse,
+                (httpResponse.allHeaderFields[headerContentType] as? String) == headerContentTypeValue,
+                (httpResponse.allHeaderFields[headerCacheControl] as? String) == headerCacheControlValue {
+                expectation.fulfill()
+            }
+        }
+        downloadTask.resume()
+        
+        // Expect
+        self.waitForExpectations(timeout: 2.0, handler: nil)
+    }
+    
+    func testResponseDataHasSpecifiedHeadersResponses_shouldReturnWithSpecifiedHeaders() {
+        // Given
+        let jsonData = dataFromCurrentClassBundleRessource(filename: "hello.json")
+        let headerContentType = "Content-Type"
+        let headerContentTypeValue = "application/vnd.openium.v1+json"
+        let headerCacheControl = "Cache-Control"
+        let headerCacheControlValue = "no-cache"
+        let customResponseHeaders = [headerContentType: headerContentTypeValue]
+        sut.defaultResponseHeaders = [headerCacheControl: headerCacheControlValue]
+        
+        // When
+        let url = sut.makeRequest(onPath: "/hello.json", data: jsonData, customResponseHeaders: customResponseHeaders)
+        let expectation = self.expectation(description: "file hello.json must be served with custom headers content type")
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            if let httpResponse = urlResponse as? HTTPURLResponse,
+                (httpResponse.allHeaderFields[headerContentType] as? String) == headerContentTypeValue,
+                (httpResponse.allHeaderFields[headerCacheControl] as? String) == headerCacheControlValue {
+                expectation.fulfill()
+            }
+        }
+        downloadTask.resume()
+        
+        // Expect
+        self.waitForExpectations(timeout: 2.0, handler: nil)
+    }
 }
 
 extension STKPilotableHTTPServerTests: URLSessionTaskDelegate {

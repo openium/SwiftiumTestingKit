@@ -96,7 +96,7 @@ public class STKPilotableHTTPServer: NSObject {
     let scheme: String
     let host: String
     let documentRoot: String
-    var defaultResponseHeaders: [String: String]?
+    public var defaultResponseHeaders: [String: String]?
     
     public init(scheme: String, host: String, documentRoot: String) {
         self.scheme = scheme
@@ -157,9 +157,16 @@ public class STKPilotableHTTPServer: NSObject {
                             data: Data?,
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
-                            serveForever: Bool = false) -> URL {
+                            serveForever: Bool = false,
+                            customResponseHeaders: [String: String]? = nil) -> URL {
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
-            return OHHTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: nil)
+            var headers = self.defaultResponseHeaders ?? [String: String]()
+            if let customResponseHeaders = customResponseHeaders {
+                headers.merge(customResponseHeaders) { (left, right) -> String in
+                    return right
+                }
+            }
+            return OHHTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: headers)
         }
         queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)
@@ -170,9 +177,21 @@ public class STKPilotableHTTPServer: NSObject {
                             serveContentOfFileAtPath fileAtPath: String,
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
-                            serveForever: Bool = false) -> URL {
+                            serveForever: Bool = false,
+                            customResponseHeaders: [String: String]? = nil) -> URL {
         let stubPath = self.pathFromDocumentRoot(of: fileAtPath)
-        let headers = self.headersWithMimeTypeOfFile(at: fileAtPath)
+        var headers = [String: String]()
+        if let headersWithMimeType = self.headersWithMimeTypeOfFile(at: fileAtPath) {
+            headers.merge(headersWithMimeType) { (left, right) -> String in
+                return right
+            }
+        }
+        if let customResponseHeaders = customResponseHeaders {
+            headers.merge(customResponseHeaders) { (left, right) -> String in
+                return right
+            }
+        }
+        
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
             return OHHTTPStubsResponse(fileAtPath: stubPath,
                                        statusCode: statusCode,
