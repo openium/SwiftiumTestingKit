@@ -174,4 +174,19 @@ class STKSoloTests: XCTestCase {
         XCTAssertTrue(waitForCell)
         XCTAssertTrue(waitForDeleteConfirmationButton)
     }
+    
+    func testWaitForText_onAlertViewController_shouldFindOKButton() {
+        // Given
+        sut.showViewControllerInCleanWindow(viewController)
+        let alertVC = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
+        let alertOKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertVC.addAction(alertOKAction)
+        viewController.present(alertVC, animated: false, completion: nil)
+        
+        // When
+        let waitForOK = sut.waitFor(tappableText: "OK", andTapIt: true)
+        
+        // Expect
+        XCTAssertTrue(waitForOK)
+    }
 }

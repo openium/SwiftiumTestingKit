@@ -10,7 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [0.1.7](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+
+## [0.1.8](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.8...HEAD)
+### Added
+
+### Changed
+Fix issue when tapping accessibility element's view not available yet
+
+### Removed
+
+## [0.1.7](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.7...HEAD)
 ### Added
 Allow pilotable server to specify responses headers for all requests and responses headers for each request
 
@@ -18,7 +27,7 @@ Allow pilotable server to specify responses headers for all requests and respons
 
 ### Removed
 
-## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.6...HEAD)
 ### Added
 
 ### Changed
@@ -26,7 +35,7 @@ Fixed search for text containing \n
 
 ### Removed
 
-## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.5...HEAD)
 ### Added
 
 ### Changed

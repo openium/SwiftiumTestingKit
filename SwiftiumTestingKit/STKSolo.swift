@@ -14,6 +14,10 @@ import SimulatorStatusMagiciOS
 public class STKSolo: NSObject {
     public var animationSpeed: Float = 1.0
     public var timeToWaitForever: Double = 20
+    static var isSingleTestRunning: Bool = {
+        return isSingleTestRun()
+    }()
+    
     var internalTimeToWaitForever: Double {
         var time = timeToWaitForever
         if isUserJenkinsOrHudson() {
@@ -83,6 +87,15 @@ public class STKSolo: NSObject {
         self.window = nil
     }
     
+    func waitRunLoops(timeBetweenChecks: TimeInterval) {
+        RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: timeBetweenChecks / 3.0))
+        RunLoop.current.run(mode: .common, before: Date(timeIntervalSinceNow: timeBetweenChecks / 3.0))
+        RunLoop.current.run(mode: .tracking, before: Date(timeIntervalSinceNow: timeBetweenChecks / 3.0))
+        if !STKSolo.isSingleTestRunning {
+            CATransaction.flush() // prevents animations
+        }
+    }
+    
     func waitClosureToReturnTrue(_ closure: () -> Bool,
         withinTimeout timeout: TimeInterval,
         timeBetweenChecks: TimeInterval) {
@@ -92,7 +105,7 @@ public class STKSolo: NSObject {
             if closure() {
                 break
             }
-            RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: timeBetweenChecks))
+            waitRunLoops(timeBetweenChecks: timeBetweenChecks)
             now = Date.timeIntervalSinceReferenceDate
         } while (now - start) < timeout
     }
@@ -136,8 +149,14 @@ public class STKSolo: NSObject {
         let cleanedText = accessibilityCleaned(text: tappableText)
         let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         if let element = element {
-            if let view = try? UIAccessibilityElement.viewContaining(element, tappable: true) {
+            var view: UIView? = nil
+            waitClosureToReturnTrue({ () -> Bool in
+                view = try? UIAccessibilityElement.viewContaining(element, tappable: true)
+                return view != nil
+            }, withinTimeout: timeoutForWaitForMethods, timeBetweenChecks: timeBetweenChecks)
+            if let view = view {
                 testActor.tap(element, in: view)
+                waitRunLoops(timeBetweenChecks: timeBetweenChecks)
             } else {
                 return false
             }
@@ -216,43 +235,40 @@ public class STKSolo: NSObject {
     #endif
 }
 
-extension STKSolo {
-    
-    func isUserJenkinsOrHudson() -> Bool {
-        var username = NSUserName()
-        #if targetEnvironment(simulator)
-        if username.isEmpty {
-            let bundlePathComponents = (Bundle.main.bundlePath as NSString).pathComponents
-            if bundlePathComponents.count >= 3 && bundlePathComponents[0] == "/" && bundlePathComponents[1] == "Users" {
-                username = bundlePathComponents[2]
-            }
-        }
-        #endif
-        return username == "hudson" || username == "jenkins"
-    }
-    
-    func isSingleTestRun() -> Bool {
-        /*
-        XCTestConfiguration *testConfiguration = [XCTestConfiguration activeTestConfiguration];
-        // KO when running test of only one class (testsToRun is an Array<String> with class/test names, or just class name)
-        return [testConfiguration.testsToRun count] == 1 && [[testConfiguration.testsToRun anyObject] containsString:@"/"];
-        */
-        if let plistPath = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"],
-           let plistBinary = FileManager.default.contents(atPath: plistPath),
-           let unarchivedObject = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(plistBinary),
-           let object = unarchivedObject as? NSObject,
-           let testsToRun = object.value(forKey: "testsToRun") as? NSSet,
-           testsToRun.count == 1,
-           let singleTestToRun = testsToRun.anyObject() as? NSString {
-            return singleTestToRun.contains("/")
-        } else {
-            return false
+func isUserJenkinsOrHudson() -> Bool {
+    var username = NSUserName()
+    #if targetEnvironment(simulator)
+    if username.isEmpty {
+        let bundlePathComponents = (Bundle.main.bundlePath as NSString).pathComponents
+        if bundlePathComponents.count >= 3 && bundlePathComponents[0] == "/" && bundlePathComponents[1] == "Users" {
+            username = bundlePathComponents[2]
         }
     }
-    
-    func isMultipleTestsRun() -> Bool {
-        return XCTestSuite.default.testCaseCount > 1
+    #endif
+    return username == "hudson" || username == "jenkins"
+}
+
+func isSingleTestRun() -> Bool {
+    /*
+    XCTestConfiguration *testConfiguration = [XCTestConfiguration activeTestConfiguration];
+    // KO when running test of only one class (testsToRun is an Array<String> with class/test names, or just class name)
+    return [testConfiguration.testsToRun count] == 1 && [[testConfiguration.testsToRun anyObject] containsString:@"/"];
+    */
+    if let plistPath = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"],
+       let plistBinary = FileManager.default.contents(atPath: plistPath),
+       let unarchivedObject = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(plistBinary),
+       let object = unarchivedObject as? NSObject,
+       let testsToRun = object.value(forKey: "testsToRun") as? NSSet,
+       testsToRun.count == 1,
+       let singleTestToRun = testsToRun.anyObject() as? NSString {
+        return singleTestToRun.contains("/")
+    } else {
+        return false
     }
+}
+
+func isMultipleTestsRun() -> Bool {
+    return XCTestSuite.default.testCaseCount > 1
 }
 
 extension STKSolo: KIFTestActorDelegate {
