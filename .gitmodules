@@ -1,0 +1,9 @@
+[submodule "Carthage/Checkouts/KIF"]
+	path = Carthage/Checkouts/KIF
+	url = https://github.com/kif-framework/KIF.git
+[submodule "Carthage/Checkouts/OHHTTPStubs"]
+	path = Carthage/Checkouts/OHHTTPStubs
+	url = https://github.com/AliSoftware/OHHTTPStubs.git
+[submodule "Carthage/Checkouts/SimulatorStatusMagic"]
+	path = Carthage/Checkouts/SimulatorStatusMagic
+	url = https://github.com/shinydevelopment/SimulatorStatusMagic.git

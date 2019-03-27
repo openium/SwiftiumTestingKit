@@ -10,8 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.2.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.2.0...HEAD)
+### Added
 
-## [0.1.8](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.8...HEAD)
+### Changed
+Swift 5 support (dependency updates)
+
+### Removed
+
+
+## [0.1.8](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.8...v0.2.0)
 ### Added
 
 ### Changed
@@ -19,7 +27,7 @@ Fix issue when tapping accessibility element's view not available yet
 
 ### Removed
 
-## [0.1.7](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.7...HEAD)
+## [0.1.7](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.7...v0.1.8)
 ### Added
 Allow pilotable server to specify responses headers for all requests and responses headers for each request
 
@@ -27,7 +35,7 @@ Allow pilotable server to specify responses headers for all requests and respons
 
 ### Removed
 
-## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.6...HEAD)
+## [0.1.6](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.6...v0.1.7)
 ### Added
 
 ### Changed
@@ -35,14 +43,14 @@ Fixed search for text containing \n
 
 ### Removed
 
-## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.5...HEAD)
+## [0.1.5](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.5...v0.1.6)
 ### Added
 
 ### Changed
 Allow pilotable server to have an empty data as input to manage properly the 204 HTTP code
 
 
-## [0.1.4](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.4...HEAD)
+## [0.1.4](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.4...v0.1.5)
 ### Added
 
 ### Changed
@@ -51,7 +59,7 @@ Expose solo.window
 
 ### Removed
 
-## [0.1.3](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.3...latest)
+## [0.1.3](https://github.com/openium/SwiftiumTestingKit/compare/v0.1.3...v0.1.4)
 ### Added
 
 ### Changed
