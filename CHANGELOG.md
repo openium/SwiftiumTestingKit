@@ -6,11 +6,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
 ### Added
 
-### Changed
+### Changed 
 
 ### Removed
 
-## [0.2.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.2.0...HEAD)
+## [0.3.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.3.0...HEAD)
+### Added
+Support for Swift 5.1
+
+### Changed
+Added a test to validate searching of test with UITextView 
+
+### Removed
+
+## [0.2.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.2.0...v0.3.0)
 ### Added
 
 ### Changed
