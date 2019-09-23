@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet public weak var helloButton: UIButton!
     @IBOutlet public weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet public weak var tableView: UITableView!
-
+    @IBOutlet public weak var textView: UITextView!
+    
     var tapped: Bool = false
 
     override func viewDidLoad() {

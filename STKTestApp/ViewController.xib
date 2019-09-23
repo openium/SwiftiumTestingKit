@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +13,7 @@
                 <outlet property="activityIndicator" destination="zfv-iw-v0V" id="3Ad-0c-Aht"/>
                 <outlet property="helloButton" destination="HSL-Bx-caw" id="KKZ-2q-8XY"/>
                 <outlet property="tableView" destination="Wym-q8-nlS" id="RVQ-4d-JBg"/>
+                <outlet property="textView" destination="OMh-gq-4sL" id="xXF-Jx-6h9"/>
                 <outlet property="topLabel" destination="ldY-JD-zXY" id="5f7-3d-4k5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="OBT-Zz-VGn"/>
             </connections>
@@ -24,13 +24,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldY-JD-zXY">
-                    <rect key="frame" x="153" y="20" width="69" height="21"/>
+                    <rect key="frame" x="153" y="0.0" width="69" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-Bx-caw">
-                    <rect key="frame" x="145.5" y="83" width="84" height="30"/>
+                    <rect key="frame" x="145.5" y="63" width="84" height="30"/>
                     <state key="normal" title="Hello button"/>
                     <connections>
                         <action selector="tapped:" destination="-1" eventType="touchUpInside" id="6dL-KA-4kw"/>
@@ -59,7 +59,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wym-q8-nlS">
-                    <rect key="frame" x="0.0" y="308" width="375" height="184"/>
+                    <rect key="frame" x="0.0" y="288" width="375" height="184"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="184" id="TzL-h2-rF3"/>
@@ -69,10 +69,24 @@
                         <outlet property="delegate" destination="-1" id="fgb-0X-hv6"/>
                     </connections>
                 </tableView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum textview" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-gq-4sL">
+                    <rect key="frame" x="16" y="539" width="343" height="128"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" staticText="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="cQ6-0u-uRN"/>
+                    </constraints>
+                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="33r-Zc-Tu0" secondAttribute="trailing" id="1Vf-YZ-7D7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OMh-gq-4sL" secondAttribute="trailing" constant="16" id="89J-cM-DAx"/>
                 <constraint firstItem="HSL-Bx-caw" firstAttribute="top" secondItem="ldY-JD-zXY" secondAttribute="bottom" constant="42" id="E18-BR-AhT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Wym-q8-nlS" secondAttribute="trailing" id="FCF-fS-Tvo"/>
                 <constraint firstItem="ldY-JD-zXY" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="FtC-yW-T3X"/>
@@ -80,6 +94,8 @@
                 <constraint firstItem="33r-Zc-Tu0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="107" id="P66-9a-wzX"/>
                 <constraint firstItem="Wym-q8-nlS" firstAttribute="top" secondItem="HSL-Bx-caw" secondAttribute="bottom" constant="195" id="PU6-kG-Mg3"/>
                 <constraint firstItem="33r-Zc-Tu0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Q0t-9I-sqk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="OMh-gq-4sL" secondAttribute="bottom" id="Y3H-Z4-RmO"/>
+                <constraint firstItem="OMh-gq-4sL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="dRq-g0-dtx"/>
                 <constraint firstItem="Wym-q8-nlS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fuF-1e-Mzr"/>
                 <constraint firstItem="ldY-JD-zXY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="pfw-ix-V5a"/>
             </constraints>

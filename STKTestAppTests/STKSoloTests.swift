@@ -189,4 +189,20 @@ class STKSoloTests: XCTestCase {
         // Expect
         XCTAssertTrue(waitForOK)
     }
+    
+    func testWaitForText_inTextView_shouldBeFound() {
+        // Given
+        let text = "Lorem ipsum textview"
+        sut.showViewControllerInCleanWindow(viewController)
+        
+        // When
+        self.viewController.textView.accessibilityLabel = text
+        let waitForText = sut.waitFor(text: text)
+        sut.window?.printHierarchy()
+        //sut.waitForever()
+        
+        // Expect
+        XCTAssertTrue(waitForText)
+    }
+
 }
