@@ -1,6 +1,9 @@
 #!/bin/sh
 
-VERSION=$(/usr/libexec/PlistBuddy SwiftiumTestingKit/Info.plist -c "print CFBundleShortVersionString")
+if [ $# -lt 1 ] ; then
+    echo "usage : `basename $0` 0.3.0";
+    exit -1
+fi
 
 TAG=v$VERSION
 
