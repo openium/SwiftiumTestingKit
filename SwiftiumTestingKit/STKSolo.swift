@@ -55,6 +55,8 @@ public class STKSolo: NSObject {
         if KIFAccessibilityEnabled() == false {
             KIFEnableAccessibility()
         }
+        super.init()
+        _ = testActor
     }
     
     @discardableResult
