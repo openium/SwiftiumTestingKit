@@ -21,5 +21,5 @@ git push --tags
 git tag -f latest
 git push --tags -f
 
-echo "You can now upload SwiftiumTestingKit.framework.zip and edit release notes from https://github.com/openium/SwiftiumiTestingKit/releases/edit/$TAG"
+echo "You can now upload SwiftiumTestingKit.framework.zip and edit release notes from https://github.com/openium/SwiftiumTestingKit/releases/edit/$TAG"
 

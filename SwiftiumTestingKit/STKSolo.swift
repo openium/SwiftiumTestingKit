@@ -18,6 +18,8 @@ public class STKSolo: NSObject {
         return isSingleTestRun()
     }()
     
+    public static var defaultCarrierName = "OPENIUM"
+    
     var internalTimeToWaitForever: Double {
         var time = timeToWaitForever
         if isUserJenkinsOrHudson() {
@@ -43,7 +45,7 @@ public class STKSolo: NSObject {
         }
         testActor.executionBlockTimeout = timeoutForWaitForMethods
 
-        SDStatusBarManager.sharedInstance()?.carrierName = "OPENIUM"
+        SDStatusBarManager.sharedInstance()?.carrierName = STKSolo.defaultCarrierName
         SDStatusBarManager.sharedInstance()?.bluetoothState = SDStatusBarManagerBluetoothState.visibleConnected
         SDStatusBarManager.sharedInstance()?.enableOverrides()
 
