@@ -10,7 +10,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [0.3.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.3.0...HEAD)
+## [0.3.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.3.0...v0.4.0)
+### Added
+Attach screenshot using XCUIScreen.main.screenshot() and a name
+
+### Changed
+Update SimulatorStatusMagic to ios13 branch
+
+### Removed
+
+
+## [0.3.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.3.0...v0.4.0)
 ### Added
 Support for Swift 5.1
 

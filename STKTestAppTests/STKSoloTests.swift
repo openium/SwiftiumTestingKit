@@ -182,7 +182,7 @@ class STKSoloTests: XCTestCase {
         let alertOKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertVC.addAction(alertOKAction)
         viewController.present(alertVC, animated: false, completion: nil)
-        
+        attachScreenshot(name: "test")
         // When
         let waitForOK = sut.waitFor(tappableText: "OK", andTapIt: true)
         

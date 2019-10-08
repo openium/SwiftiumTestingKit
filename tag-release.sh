@@ -5,6 +5,7 @@ if [ $# -lt 1 ] ; then
     exit -1
 fi
 
+VERSION=$1
 TAG=v$VERSION
 
 echo "Have you updated the changelog for version $VERSION ? (ctrl-c to go update it)"

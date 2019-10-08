@@ -66,11 +66,20 @@ extension XCTestCase {
                                  name: StaticString = #function,
                                  cleaningMethodNameWith: (StaticString) -> String) {
         //let image = solo.window.otk_screenshot(withStatusBar: true)
-        let image = window.layer.screenshot
+        let image = XCUIScreen.main.screenshot().image
+        //let image = window.layer.screenshot
         let attachment = XCTAttachment(image: image, quality: .medium)
         attachment.lifetime = .keepAlways
         let nameCleaned = cleaningMethodNameWith(name)
         attachment.name = nameCleaned
+        add(attachment)
+    }
+    
+    public func attachScreenshot(name: String) {
+        let image = XCUIScreen.main.screenshot().image
+        let attachment = XCTAttachment(image: image, quality: .medium)
+        attachment.lifetime = .keepAlways
+        attachment.name = name
         add(attachment)
     }
 }
