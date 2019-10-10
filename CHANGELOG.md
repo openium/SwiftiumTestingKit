@@ -3,12 +3,22 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/latest...HEAD)
+## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.0...HEAD)
 ### Added
 
 ### Changed 
 
 ### Removed
+
+## [0.6.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.5.0...v0.4.0)
+### Added
+Add ability for solo to waitForAnimationsToFinish
+
+### Changed
+attachScreenshot now prefixes the attachment name with Locale identifier and device name
+
+### Removed
+latest tag "update" and force push making clones not able to fetch smoothly 
 
 ## [0.5.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.5.0...v0.4.0)
 ### Added

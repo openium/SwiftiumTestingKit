@@ -185,6 +185,10 @@ public class STKSolo: NSObject {
         return textBecameInvalid
     }
     
+    public func waitForAnimationsToFinish() {
+        testActor.waitForAnimationsToFinish()
+    }
+    
     public func waitForever() {
         testActor.wait(forTimeInterval: internalTimeToWaitForever)
     }

@@ -75,11 +75,15 @@ extension XCTestCase {
         add(attachment)
     }
     
-    public func attachScreenshot(name: String) {
+    public func attachScreenshot(name: String, useLangPhonePrefix: Bool = true, separator: String = "_") {
         let image = XCUIScreen.main.screenshot().image
         let attachment = XCTAttachment(image: image, quality: .medium)
         attachment.lifetime = .keepAlways
-        attachment.name = name
+        if useLangPhonePrefix {
+            attachment.name = NSLocale.current.identifier + separator + UIDevice.current.name + separator + name
+        } else {
+            attachment.name = name
+        }
         add(attachment)
     }
 }
