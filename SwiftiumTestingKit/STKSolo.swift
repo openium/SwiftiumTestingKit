@@ -128,11 +128,19 @@ public class STKSolo: NSObject {
     }
     
     public func accessibilityCleaned(text: String) -> String {
-        return text.replacingOccurrences(of: "\n", with: " ")
+        guard let regex = try? NSRegularExpression(pattern: "(?<!\n)\n(?!\n)", options: []) else { return text }
+        
+        return regex.stringByReplacingMatches(
+            in: text,
+            options: [],
+            range: NSMakeRange(0, text.count),
+            withTemplate: " "
+        )
     }
     
     public func waitFor(text: String) -> Bool {
         let cleanedText = accessibilityCleaned(text: text)
+        print("Cleaned: \(cleanedText)")
         let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         return element != nil
     }

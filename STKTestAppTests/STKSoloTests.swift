@@ -40,7 +40,12 @@ class STKSoloTests: XCTestCase {
 
     func testWaitForText_shouldFindWhitespacedLabelTest() {
         // Given
-        let texts = ["Some \n text", "Some \t text"]
+        let texts = [
+            "Some \n text",
+            "Some \n\n text",
+            "Some \n\n text \n and another",
+            "Some \t text"
+        ]
         var foundTestTexts = [String: Bool]()
         sut.showViewControllerInCleanWindow(viewController)
         

@@ -10,7 +10,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [0.6.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.5.0...v0.4.0)
+## [0.6.1](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.1...v0.6.0)
+### Added
+
+### Changed
+Fixed search for text containing \n\n
+
+### Removed
+
+## [0.6.0](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.0...v0.5.0)
 ### Added
 Add ability for solo to waitForAnimationsToFinish
 
