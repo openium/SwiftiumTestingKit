@@ -140,7 +140,6 @@ public class STKSolo: NSObject {
     
     public func waitFor(text: String) -> Bool {
         let cleanedText = accessibilityCleaned(text: text)
-        print("Cleaned: \(cleanedText)")
         let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         return element != nil
     }

@@ -10,6 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.6.2](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.2...v0.6.1)
+### Added
+
+### Changed
+
+### Removed
+Debug logs
+
 ## [0.6.1](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.1...v0.6.0)
 ### Added
 
