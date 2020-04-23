@@ -32,7 +32,7 @@ class STKPilotableHTTPServerTests: XCTestCase {
         
         // Expect
         XCTAssertFalse(allServedAfterQueuing)
-        XCTAssertEqual(OHHTTPStubs.allStubs().count, 0)
+        XCTAssertEqual(HTTPStubs.allStubs().count, 0)
     }
     
     func testMakeRequestReturnData_emptyData_204() {

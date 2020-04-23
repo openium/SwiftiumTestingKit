@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KIF",
+        "repositoryURL": "https://github.com/openium/KIF",
+        "state": {
+          "branch": "master",
+          "revision": "f37d791f40f6f112b288eba967e1c1386fbe598b",
+          "version": null
+        }
+      },
+      {
+        "package": "OHHTTPStubs",
+        "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs",
+        "state": {
+          "branch": null,
+          "revision": "e92b5a5746ef16add2a1424f1fc19529d9a75cde",
+          "version": "9.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

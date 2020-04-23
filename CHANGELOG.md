@@ -5,10 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.0...HEAD)
 ### Added
+Swift Package Manager support
 
-### Changed 
+### Changed
 
 ### Removed
+Carthage support
+SimulatorStatusBarMagic
 
 ## [0.6.2](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.2...v0.6.1)
 ### Added

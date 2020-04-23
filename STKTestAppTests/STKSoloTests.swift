@@ -59,6 +59,8 @@ class STKSoloTests: XCTestCase {
         // Expect
         XCTAssertTrue(foundTestTexts[texts[0]] ?? false)
         XCTAssertTrue(foundTestTexts[texts[1]] ?? false)
+        XCTAssertTrue(foundTestTexts[texts[2]] ?? false)
+        XCTAssertTrue(foundTestTexts[texts[3]] ?? false)
     }
 
     func testWaitForText_shouldFindLabelTestUsingPrefix() {

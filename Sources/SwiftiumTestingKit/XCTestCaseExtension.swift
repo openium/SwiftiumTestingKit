@@ -32,24 +32,22 @@ extension XCTestCase {
     
     public func dataFromCurrentClassBundleRessource(filename: String, mainBundle: Bool = false) -> Data {
         let path = pathFromCurrentClassBundleRessource(filename: filename, mainBundle: mainBundle)
-        var data: Data? = nil
         do {
-            data = try Data(contentsOf: URL(fileURLWithPath: path))
+            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+            return data
         } catch let error as NSError {
             fatalError("Can't load data from bundle resource \(filename) (path \(path) \(error.localizedDescription))")
         }
-        return data!
     }
     
     public func jsonObjectFromRessource(filename: String, mainBundle: Bool = false) -> Any {
         let data = dataFromCurrentClassBundleRessource(filename: filename, mainBundle: mainBundle)
-        var json: Any! = nil
         do {
-            json = try JSONSerialization.jsonObject(with: data)
+            let json = try JSONSerialization.jsonObject(with: data)
+            return json
         } catch let error as NSError {
             fatalError("Can't load json from data of bundle resource \(filename): \(error.localizedDescription)")
         }
-        return json
     }
     
     // MARK: -

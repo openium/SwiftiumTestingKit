@@ -9,7 +9,6 @@
 import UIKit
 import XCTest
 import KIF
-import SimulatorStatusMagiciOS
 
 public class STKSolo: NSObject {
     public var animationSpeed: Float = 1.0
@@ -44,10 +43,6 @@ public class STKSolo: NSObject {
             fatalError("Can't instanciate a KIFUITestActor")
         }
         testActor.executionBlockTimeout = timeoutForWaitForMethods
-
-        SDStatusBarManager.sharedInstance()?.carrierName = STKSolo.defaultCarrierName
-        SDStatusBarManager.sharedInstance()?.bluetoothState = SDStatusBarManagerBluetoothState.visibleConnected
-        SDStatusBarManager.sharedInstance()?.enableOverrides()
 
         return testActor
     }()
@@ -288,7 +283,9 @@ func isMultipleTestsRun() -> Bool {
 
 extension STKSolo: KIFTestActorDelegate {
     public func fail(with exception: NSException!, stopTest stop: Bool) {
-        lastExceptions.append(exception)
+        if let exception = exception {
+            lastExceptions.append(exception)
+        }
     }
     
     public func fail(withExceptions exceptions: [Any]!, stopTest stop: Bool) {

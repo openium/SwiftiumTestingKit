@@ -6,11 +6,12 @@
 //  Copyright © 2018 Openium. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import MobileCoreServices
 
-public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> OHHTTPStubsTestBlock {
+public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> HTTPStubsTestBlock {
     return { $0.httpMethod == verb.rawValue }
 }
 
@@ -31,27 +32,27 @@ public class STKPilotableHTTPServer: NSObject {
     }
     static func removeFromAllPilotableServers(_ pilotableServer: STKPilotableHTTPServer) {
         allPilotableServers.removeAll { $0.server == nil }
-        pilotableServer.foreverQueuedDescriptors.forEach { OHHTTPStubs.removeStub($0) }
-        pilotableServer.nonForeverQueuedDescriptors.forEach { OHHTTPStubs.removeStub($0) }
+        pilotableServer.foreverQueuedDescriptors.forEach { HTTPStubs.removeStub($0) }
+        pilotableServer.nonForeverQueuedDescriptors.forEach { HTTPStubs.removeStub($0) }
     }
     static func activateStubMissingAndActivationObservers() {
-        OHHTTPStubs.onStubMissing({ (request) in
+        HTTPStubs.onStubMissing({ (request) in
             NSLog("no served response queued for request \(request)")
         })
-        OHHTTPStubs.onStubActivation({ (request, descriptor, response) in
+        HTTPStubs.onStubActivation({ (request, descriptor, response) in
             allPilotableServers.forEach({ (unownedServer) in
                 guard let server = unownedServer.server else { return }
                 if server.removeDescriptorFromNonForeverQueue(descriptor) {
-                    OHHTTPStubs.removeStub(descriptor)
+                    HTTPStubs.removeStub(descriptor)
                 }
             })
         })
     }
     
-    var foreverQueuedDescriptors = [OHHTTPStubsDescriptor]()
-    var nonForeverQueuedDescriptors = [OHHTTPStubsDescriptor]()
+    var foreverQueuedDescriptors = [HTTPStubsDescriptor]()
+    var nonForeverQueuedDescriptors = [HTTPStubsDescriptor]()
     
-    func queue(descriptor: OHHTTPStubsDescriptor, serveForever: Bool) {
+    func queue(descriptor: HTTPStubsDescriptor, serveForever: Bool) {
         if serveForever == false {
             descriptor.name = descriptor.debugDescription
             nonForeverQueuedDescriptors.append(descriptor)
@@ -60,7 +61,7 @@ public class STKPilotableHTTPServer: NSObject {
         }
     }
 
-    func removeDescriptorFromNonForeverQueue(_ descriptor: OHHTTPStubsDescriptor) -> Bool {
+    func removeDescriptorFromNonForeverQueue(_ descriptor: HTTPStubsDescriptor) -> Bool {
         var removed = false
         let index = nonForeverQueuedDescriptors.firstIndex(where: { (nonForeverDescriptor) -> Bool in
             return nonForeverDescriptor.name == descriptor.name
@@ -166,7 +167,7 @@ public class STKPilotableHTTPServer: NSObject {
                     return right
                 }
             }
-            return OHHTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: headers)
+            return HTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: headers)
         }
         queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)
@@ -193,7 +194,7 @@ public class STKPilotableHTTPServer: NSObject {
         }
         
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
-            return OHHTTPStubsResponse(fileAtPath: stubPath,
+            return HTTPStubsResponse(fileAtPath: stubPath,
                                        statusCode: statusCode,
                                        headers: headers)
         }
@@ -207,7 +208,7 @@ public class STKPilotableHTTPServer: NSObject {
                             statusCode: Int32 = 301,
                             serveForever: Bool = false) -> URL {
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path)) { _ in
-            return OHHTTPStubsResponse(data: Data(),
+            return HTTPStubsResponse(data: Data(),
                                        statusCode: statusCode,
                                        headers: [HTTPHeaders.location.rawValue: toLocation])
         }
