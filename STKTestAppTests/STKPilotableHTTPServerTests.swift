@@ -246,6 +246,30 @@ class STKPilotableHTTPServerTests: XCTestCase {
         // Expect
         self.waitForExpectations(timeout: 2.0, handler: nil)
     }
+    
+    func testHasServedAllQueuedResponses_shouldReturnTrue_withRequestTimeTo5() {
+        // Given
+        
+        // When
+        let url = sut.makeRequest(onPath: "/hello.json", serveContentOfFileAtPath: "hello.json", requestTime: 0.5)
+        let allServedAfterQueuing = sut.hasServedAllQueuedResponses
+        let expectation = self.expectation(description: "file hello.json must be served")
+        let downloadTask = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            expectation.fulfill()
+        }
+        let startDate = Date()
+        downloadTask.resume()
+
+        self.waitForExpectations(timeout: 1.0, handler: nil)
+        let endDate = Date()
+        
+        // Expect
+        let duration = endDate.timeIntervalSince1970 - startDate.timeIntervalSince1970
+        XCTAssertTrue(duration < 0.6)
+        XCTAssertTrue(duration > 0.49)
+        XCTAssertFalse(allServedAfterQueuing)
+        XCTAssertTrue(sut.hasServedAllQueuedResponses)
+    }
 }
 
 extension STKPilotableHTTPServerTests: URLSessionTaskDelegate {
