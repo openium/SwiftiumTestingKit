@@ -17,8 +17,6 @@ public class STKSolo: NSObject {
         return isSingleTestRun()
     }()
     
-    public static var defaultCarrierName = "OPENIUM"
-    
     var internalTimeToWaitForever: Double {
         var time = timeToWaitForever
         if isUserJenkinsOrHudson() {

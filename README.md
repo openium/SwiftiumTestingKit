@@ -37,10 +37,16 @@ Add the following libraries to your test target :
 
 # To be done :
 
-Add CONTRIBUTING & CODE_OF_CONDUCT files
+- Add CONTRIBUTING & CODE_OF_CONDUCT files
+- Add URLQueryItems to PilotableServer
+- Replace KIF with something like this : https://github.com/cashapp/AccessibilitySnapshot/blob/master/AccessibilitySnapshot/Classes/AccessibilityHierarchyParser.swift
 
 ## Change log
 
 We follow [keepachangelog.com](http://keepachangelog.com) recommandations for our [CHANGELOG]
 
 [CHANGELOG]: CHANGELOG.md
+
+## Useful links
+
+https://medium.com/@hacknicity/how-to-switch-your-ios-app-and-scene-delegates-for-improved-testing-9746279378c3

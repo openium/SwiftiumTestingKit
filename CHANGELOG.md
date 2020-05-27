@@ -5,13 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.0...HEAD)
 ### Added
-Swift Package Manager support
+- Swift Package Manager support
+- Add request and response time to PilotableServer
 
 ### Changed
 
 ### Removed
-Carthage support
-SimulatorStatusBarMagic
+- Carthage support
+- SimulatorStatusBarMagic (run `xcrun simctl status_bar` to see what Xcode provide instead)
 
 ## [0.6.2](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.2...v0.6.1)
 ### Added

@@ -158,6 +158,8 @@ public class STKPilotableHTTPServer: NSObject {
                             data: Data?,
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
+                            requestTime: TimeInterval = 0.0,
+                            responseTime: TimeInterval = 0.0,
                             serveForever: Bool = false,
                             customResponseHeaders: [String: String]? = nil) -> URL {
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
@@ -167,7 +169,10 @@ public class STKPilotableHTTPServer: NSObject {
                     return right
                 }
             }
-            return HTTPStubsResponse(data: data ?? Data(), statusCode: statusCode, headers: headers)
+            return HTTPStubsResponse(data: data ?? Data(),
+                                     statusCode: statusCode,
+                                     headers: headers)
+                .requestTime(requestTime, responseTime: responseTime)
         }
         queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)
@@ -178,6 +183,8 @@ public class STKPilotableHTTPServer: NSObject {
                             serveContentOfFileAtPath fileAtPath: String,
                             httpVerb: HTTPVerb = .get,
                             statusCode: Int32 = 200,
+                            requestTime: TimeInterval = 0.0,
+                            responseTime: TimeInterval = 0.0,
                             serveForever: Bool = false,
                             customResponseHeaders: [String: String]? = nil) -> URL {
         let stubPath = self.pathFromDocumentRoot(of: fileAtPath)
@@ -195,8 +202,9 @@ public class STKPilotableHTTPServer: NSObject {
         
         let descriptor = stub(condition: isScheme(scheme) && isHost(host) && isPath(path) && isMethod(httpVerb)) { _ in
             return HTTPStubsResponse(fileAtPath: stubPath,
-                                       statusCode: statusCode,
-                                       headers: headers)
+                                     statusCode: statusCode,
+                                     headers: headers)
+                .requestTime(requestTime, responseTime: responseTime)
         }
         queue(descriptor: descriptor, serveForever: serveForever)
         return urlForRequest(onPath: path)

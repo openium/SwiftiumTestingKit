@@ -11,8 +11,6 @@
 		BA0B797D24519D0F0037233E /* SwiftiumTestingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B796C24519CC70037233E /* SwiftiumTestingKitTests.swift */; };
 		BA0B798124519DFA0037233E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA0B798024519DFA0037233E /* OHHTTPStubsSwift */; };
 		BA0B798424519E120037233E /* KIF in Frameworks */ = {isa = PBXBuildFile; productRef = BA0B798324519E120037233E /* KIF */; };
-		BA0B79882451A1050037233E /* SwiftiumTestingKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B79872451A1040037233E /* SwiftiumTestingKit.swift */; };
-		BA64425E2152465300E847EC /* SwiftiumTestingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BA64425C2152465300E847EC /* SwiftiumTestingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA6442662152467000E847EC /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6442642152467000E847EC /* XCTestCaseExtension.swift */; };
 		BA6442672152467000E847EC /* STKSolo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6442652152467000E847EC /* STKSolo.swift */; };
 		BA64426A215246B300E847EC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA644269215246B300E847EC /* XCTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -69,17 +67,14 @@
 
 /* Begin PBXFileReference section */
 		BA0B796C24519CC70037233E /* SwiftiumTestingKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftiumTestingKitTests.swift; sourceTree = "<group>"; };
-		BA0B796D24519CC70037233E /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		BA0B797224519CEB0037233E /* SwiftiumTestingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftiumTestingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0B797624519CEC0037233E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA0B798524519F1D0037233E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		BA0B798624519F1E0037233E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
-		BA0B79872451A1040037233E /* SwiftiumTestingKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftiumTestingKit.swift; sourceTree = "<group>"; };
 		BA0B79892451BA0C0037233E /* tag-release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "tag-release.sh"; sourceTree = "<group>"; };
 		BA277C582159219800E847EC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BA277C592159219800E847EC /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		BA6442592152465300E847EC /* SwiftiumTestingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftiumTestingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA64425C2152465300E847EC /* SwiftiumTestingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftiumTestingKit.h; sourceTree = "<group>"; };
 		BA64425D2152465300E847EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA6442642152467000E847EC /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
 		BA6442652152467000E847EC /* STKSolo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STKSolo.swift; sourceTree = "<group>"; };
@@ -159,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				BA0B796C24519CC70037233E /* SwiftiumTestingKitTests.swift */,
-				BA0B796D24519CC70037233E /* XCTestManifests.swift */,
 			);
 			path = SwiftiumTestingKitTests;
 			sourceTree = "<group>";
@@ -215,8 +209,6 @@
 			children = (
 				BADD798C215384DC00E847EC /* STKPilotableHTTPServer.swift */,
 				BA6442652152467000E847EC /* STKSolo.swift */,
-				BA64425C2152465300E847EC /* SwiftiumTestingKit.h */,
-				BA0B79872451A1040037233E /* SwiftiumTestingKit.swift */,
 				BA6442642152467000E847EC /* XCTestCaseExtension.swift */,
 			);
 			path = SwiftiumTestingKit;
@@ -264,7 +256,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA64425E2152465300E847EC /* SwiftiumTestingKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +439,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BADD798D215384DC00E847EC /* STKPilotableHTTPServer.swift in Sources */,
-				BA0B79882451A1050037233E /* SwiftiumTestingKit.swift in Sources */,
 				BA6442662152467000E847EC /* XCTestCaseExtension.swift in Sources */,
 				BA6442672152467000E847EC /* STKSolo.swift in Sources */,
 			);
