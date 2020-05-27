@@ -149,7 +149,7 @@ public class STKSolo: NSObject {
         return element != nil
     }
 
-    public func waitFor(tappableText: String, andTapIt: Bool) -> Bool {
+    public func waitFor(tappableText: String, andTapIt tapIt: Bool) -> Bool {
         let cleanedText = accessibilityCleaned(text: tappableText)
         let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
         if let element = element {
@@ -159,8 +159,10 @@ public class STKSolo: NSObject {
                 return view != nil
             }, withinTimeout: timeoutForWaitForMethods, timeBetweenChecks: timeBetweenChecks)
             if let view = view {
-                testActor.tap(element, in: view)
-                waitRunLoops(timeBetweenChecks: timeBetweenChecks)
+                if tapIt {
+                    testActor.tap(element, in: view)
+                    waitRunLoops(timeBetweenChecks: timeBetweenChecks)
+                }
             } else {
                 return false
             }

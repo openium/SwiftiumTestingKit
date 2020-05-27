@@ -107,23 +107,23 @@ class STKSoloTests: XCTestCase {
         sut.showViewControllerInCleanWindow(viewController)
 
         // When
-        let waitForText = sut.waitFor(tappableText:"Hello button", andTapIt:true)
+        let waitForText = sut.waitFor(tappableText:"Hello button", andTapIt: true)
         
         // Expect
         XCTAssertTrue(waitForText)
         XCTAssertTrue(viewController.tapped)
     }
     
-    func testWaitForTapableTextAndTapIt_WithButtonInScrollView_ShouldHaveTap() {
+    func testWaitForTapableTextAndTapIt_WithButtonInScrollView_ShouldHaveNotTapped() {
         // Given
         sut.showViewControllerInCleanWindow(viewController)
         
         // When
-        let waitForText = sut.waitFor(tappableText:"Inscrollview button", andTapIt:true)
+        let waitForText = sut.waitFor(tappableText:"Inscrollview button", andTapIt: false)
         
         // Expect
         XCTAssertTrue(waitForText)
-        XCTAssertTrue(viewController.tapped)
+        XCTAssertFalse(viewController.tapped)
     }
     
     func testWaitForTextToBecomeInvalid_shouldReturnOKForAButton() {
