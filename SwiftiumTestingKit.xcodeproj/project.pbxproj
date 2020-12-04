@@ -854,14 +854,14 @@
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 9.1.0;
 			};
 		};
 		BA0B798224519E120037233E /* XCRemoteSwiftPackageReference "KIF" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/openium/KIF";
 			requirement = {
-				branch = master;
+				branch = "spm-support-freez";
 				kind = branch;
 			};
 		};

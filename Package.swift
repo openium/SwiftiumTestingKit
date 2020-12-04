@@ -17,8 +17,8 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
-        .package(url: "https://github.com/openium/KIF", .branch("master")),
+        .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.1.0"),
+        .package(url: "https://github.com/openium/KIF", .branch("spm-support-freez")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

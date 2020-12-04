@@ -5,8 +5,8 @@
         "package": "KIF",
         "repositoryURL": "https://github.com/openium/KIF",
         "state": {
-          "branch": "master",
-          "revision": "2fc76c482d07b00e740c4d8e0782bba5653152bb",
+          "branch": "spm-support-freez",
+          "revision": "c406837031595daa215340031cd32943b76ef761",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs",
         "state": {
           "branch": null,
-          "revision": "e92b5a5746ef16add2a1424f1fc19529d9a75cde",
-          "version": "9.0.0"
+          "revision": "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+          "version": "9.1.0"
         }
       }
     ]
