@@ -1,0 +1,35 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        run-config:
+          - { xcode_version: '10.3', simulator: 'name=iPad (5th generation),OS=12.4' }
+          - { xcode_version: '10.3', simulator: 'name=iPhone X,OS=12.4' }
+          - { xcode_version: '11.7', simulator: 'name=iPad Air (3rd generation),OS=13.7' }
+          - { xcode_version: '11.7', simulator: 'name=iPhone 11 Pro,OS=13.7' }
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install XCPretty
+        run: gem install xcpretty --no-document --quiet
+
+      - name: Show Xcode versions
+        run: ls -al /Applications/Xcode*
+
+      - name: Run a multi-line script
+        run: |
+          set -o xtrace
+          set -o errexit
+          set -o pipefail
+          export DEVELOPER_DIR=/Applications/Xcode_${{ matrix.run-config['xcode_version'] }}.app/Contents/Developer
+          env NSUnbufferedIO=YES xcodebuild test -project SwiftiumTestingKit.xcodeproj -scheme STKTestApp -derivedDataPath=${PWD}/DerivedData -destination "platform=iOS Simulator,${{ matrix.run-config['simulator'] }}" | xcpretty -c
+
