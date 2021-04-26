@@ -12,7 +12,7 @@ import OHHTTPStubsSwift
 import MobileCoreServices
 
 public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> HTTPStubsTestBlock {
-    return { $0.httpMethod == verb.rawValue }
+    return { $0.httpMethod == verb.verb }
 }
 
 @objcMembers
@@ -74,16 +74,40 @@ public class STKPilotableHTTPServer: NSObject {
         return removed
     }
     
-    public enum HTTPVerb: String {
-        case head = "HEAD"
-        case get = "GET"
-        case post = "POST"
-        case put = "PUT"
-        case patch = "PATCH"
-        case delete = "DELETE"
-        case options = "OPTIONS"
-        case trace = "TRACE"
-        case connect = "CONNECT"
+    @objc
+    public enum HTTPVerb: Int {
+        case head
+        case get
+        case post
+        case put
+        case patch
+        case delete
+        case options
+        case trace
+        case connect
+        
+        var verb: String {
+            switch self {
+            case .head:
+                return "HEAD"
+            case .get:
+                return "GET"
+            case .post:
+                return "POST"
+            case .put:
+                return "PUT"
+            case .patch:
+                return "PATCH"
+            case .delete:
+                return "DELETE"
+            case .options:
+                return "OPTIONS"
+            case .trace:
+                return "TRACE"
+            case .connect:
+                return "CONNECT"
+            }
+        }
     }
     
     public enum HTTPHeaders: String {
@@ -179,6 +203,7 @@ public class STKPilotableHTTPServer: NSObject {
         return urlForRequest(onPath: path)
     }
     
+    @objc
     @discardableResult
     public func makeRequest(onPath path: String,
                             serveContentOfFileAtPath fileAtPath: String,
