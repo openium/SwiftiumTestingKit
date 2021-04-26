@@ -150,6 +150,7 @@ public class STKSolo: NSObject {
         return element != nil
     }
 
+    @discardableResult
     public func waitFor(tappableText: String, andTapIt tapIt: Bool) -> Bool {
         let cleanedText = accessibilityCleaned(text: tappableText)
         let element = waitForAccessibilityElement { $0.accessibilityLabel == cleanedText }
