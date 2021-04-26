@@ -9,7 +9,7 @@
 import XCTest
 
 extension XCTestCase {
-    
+    @objc
     public func pathFromCurrentClassBundleRessource(filename: String, mainBundle: Bool = false) -> String {
         var path: String? = nil
         let filenameAsURL = URL(string: filename)!
@@ -30,6 +30,7 @@ extension XCTestCase {
         return path!
     }
     
+    @objc
     public func dataFromCurrentClassBundleRessource(filename: String, mainBundle: Bool = false) -> Data {
         let path = pathFromCurrentClassBundleRessource(filename: filename, mainBundle: mainBundle)
         do {
@@ -40,6 +41,7 @@ extension XCTestCase {
         }
     }
     
+    @objc
     public func jsonObjectFromRessource(filename: String, mainBundle: Bool = false) -> Any {
         let data = dataFromCurrentClassBundleRessource(filename: filename, mainBundle: mainBundle)
         do {
@@ -51,8 +53,8 @@ extension XCTestCase {
     }
     
     // MARK: -
-    
-    func classNamePlusMethodCleaned(_ methodName: StaticString) -> String {
+    @objc
+    func classNamePlusMethodCleaned(_ methodName: String) -> String {
         var methodNameCleaned = methodName.description
         methodNameCleaned = methodNameCleaned.replacingOccurrences(of: "testInteGraphique", with: "")
         methodNameCleaned = methodNameCleaned.replacingOccurrences(of: "_shouldWaitForever()", with: "")
@@ -60,9 +62,10 @@ extension XCTestCase {
         return className + "_" + methodNameCleaned
     }
     
+    @objc
     public func attachScreenshot(of window: UIWindow,
-                                 name: StaticString = #function,
-                                 cleaningMethodNameWith: (StaticString) -> String) {
+                                 name: String = #function,
+                                 cleaningMethodNameWith: (String) -> String) {
         //let image = solo.window.otk_screenshot(withStatusBar: true)
         let image = XCUIScreen.main.screenshot().image
         //let image = window.layer.screenshot
@@ -73,6 +76,7 @@ extension XCTestCase {
         add(attachment)
     }
     
+    @objc
     public func attachScreenshot(name: String, useLangPhonePrefix: Bool = true, separator: String = "_") {
         let image = XCUIScreen.main.screenshot().image
         let attachment = XCTAttachment(image: image, quality: .medium)
@@ -87,12 +91,14 @@ extension XCTestCase {
 }
 
 extension UIView {
+    @objc
     var screenshot: UIImage {
         return layer.screenshot
     }
 }
 
 extension CALayer {
+    @objc
     var screenshot: UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: frame)
         let image = renderer.image { context in
@@ -103,6 +109,7 @@ extension CALayer {
 }
 
 extension NSObject {
+    @objc
     var theClassName: String {
         var theClassName = NSStringFromClass(type(of: self))
         if let rangeOfDotFromEnd = theClassName.range(of: ".", options: .backwards) {
@@ -113,11 +120,13 @@ extension NSObject {
 }
 
 extension UIActivityIndicatorView {
+    @objc
     public static func accessibilityLabelForHaltedInstance() -> String {
         let instance = UIActivityIndicatorView()
         return instance.accessibilityLabel ?? "accessibilityLabelForHaltedInstance"
     }
     
+    @objc
     public static func accessibilityLabelForAnimatedInstance() -> String {
         let instance = UIActivityIndicatorView()
         instance.startAnimating()

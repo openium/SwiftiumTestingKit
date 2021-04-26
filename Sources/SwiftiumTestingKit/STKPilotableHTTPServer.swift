@@ -15,6 +15,7 @@ public func isMethod(_ verb: STKPilotableHTTPServer.HTTPVerb) -> HTTPStubsTestBl
     return { $0.httpMethod == verb.rawValue }
 }
 
+@objcMembers
 public class STKPilotableHTTPServer: NSObject {
     
     struct WeakServerWrapper {

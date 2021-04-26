@@ -10,6 +10,7 @@ import UIKit
 import XCTest
 import KIF
 
+@objcMembers
 public class STKSolo: NSObject {
     public var animationSpeed: Float = 1.0
     public var timeToWaitForever: Double = 20
