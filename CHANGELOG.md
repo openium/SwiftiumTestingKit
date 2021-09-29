@@ -3,7 +3,22 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/v0.6.0...HEAD)
+## [Unreleased](https://github.com/openium/SwiftiumTestingKit/compare/1.1.0...HEAD)
+### Added
+
+### Changed
+
+### Removed
+
+## [1.1.0](https://github.com/openium/SwiftiumTestingKit/compare/1.1.0...1.1.0)
+### Added
+- Xcode 13 support
+
+### Changed
+
+### Removed
+
+## [1.0.0](https://github.com/openium/SwiftiumTestingKit/compare/1.0.0...v0.6.0)
 ### Added
 - Swift Package Manager support
 - Add request and response time to PilotableServer
