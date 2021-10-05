@@ -10,7 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [1.1.0](https://github.com/openium/SwiftiumTestingKit/compare/1.1.0...1.1.0)
+## [1.1.1](https://github.com/openium/SwiftiumTestingKit/compare/1.1.1...1.1.0)
+### Added
+
+### Changed
+- Fix test crash when using XCUIScreen to take screenshot
+
+### Removed
+
+
+## [1.1.0](https://github.com/openium/SwiftiumTestingKit/compare/1.1.0...1.0.0)
 ### Added
 - Xcode 13 support
 
