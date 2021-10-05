@@ -60,12 +60,20 @@ extension XCTestCase {
         return className + "_" + methodNameCleaned
     }
     
+    private func screenshot() -> UIImage {
+        // let image = XCUIScreen.main.screenshot().image // only allowed in XCUITests: Failed to get screenshot: Not authorized for performing UI testing actions.
+        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, true, 0.0)
+        let snapView = UIScreen.main.snapshotView(afterScreenUpdates: true)
+        snapView.drawHierarchy(in: snapView.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? UIImage()
+    }
+    
     public func attachScreenshot(of window: UIWindow,
                                  name: StaticString = #function,
                                  cleaningMethodNameWith: (StaticString) -> String) {
-        //let image = solo.window.otk_screenshot(withStatusBar: true)
-        let image = XCUIScreen.main.screenshot().image
-        //let image = window.layer.screenshot
+        let image = screenshot()
         let attachment = XCTAttachment(image: image, quality: .medium)
         attachment.lifetime = .keepAlways
         let nameCleaned = cleaningMethodNameWith(name)
@@ -74,7 +82,7 @@ extension XCTestCase {
     }
     
     public func attachScreenshot(name: String, useLangPhonePrefix: Bool = true, separator: String = "_") {
-        let image = XCUIScreen.main.screenshot().image
+        let image = screenshot()
         let attachment = XCTAttachment(image: image, quality: .medium)
         attachment.lifetime = .keepAlways
         if useLangPhonePrefix {

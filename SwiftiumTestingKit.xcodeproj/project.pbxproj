@@ -20,6 +20,7 @@
 		BA64427C215246CD00E847EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA64427A215246CD00E847EC /* LaunchScreen.storyboard */; };
 		BA644287215246CD00E847EC /* STKTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA644286215246CD00E847EC /* STKTestAppTests.swift */; };
 		BA64429C21524C8700E847EC /* hello.json in Resources */ = {isa = PBXBuildFile; fileRef = BA64429B21524C8700E847EC /* hello.json */; };
+		BA82C6E0270B29A100B6CF4B /* SwiftiumTestingKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BA6442592152465300E847EC /* SwiftiumTestingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BADD796F21524D5700E847EC /* SwiftiumTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6442592152465300E847EC /* SwiftiumTestingKit.framework */; };
 		BADD797121524E1400E847EC /* STKSoloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD797021524E1400E847EC /* STKSoloTests.swift */; };
 		BADD79732152558600E847EC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADD79722152558600E847EC /* ViewController.xib */; };
@@ -60,6 +61,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BA82C6E0270B29A100B6CF4B /* SwiftiumTestingKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,10 +861,10 @@
 		};
 		BA0B798224519E120037233E /* XCRemoteSwiftPackageReference "KIF" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/openium/KIF";
+			repositoryURL = "https://github.com/kif-framework/KIF";
 			requirement = {
-				branch = "spm-support-freez";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.8.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
